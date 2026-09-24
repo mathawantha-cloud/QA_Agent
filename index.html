@@ -554,7 +554,7 @@
       <div class="brand-mark">QA</div>
       <div class="brand-text">
         <h1>QA Agent</h1>
-        <p>Requirement → Test Case → ทดสอบ → Approve</p>
+        <p>Requirement → Test Case → ทดสอบ → รายงาน</p>
       </div>
     </div>
     <div class="header-actions">
@@ -642,7 +642,7 @@
         <h3 id="nameModalTitle">ใส่ชื่อก่อนเริ่มใช้งาน</h3>
         <button class="modal-close" id="nameCloseBtn" style="display:none;" aria-label="ปิด">&times;</button>
       </div>
-      <p class="modal-sub">ชื่อนี้จะถูกประทับพร้อมวันเวลาทุกครั้งที่คุณติ๊กเคสแล้วกด Approve และแสดงในไฟล์ Excel</p>
+      <p class="modal-sub">ชื่อนี้ใช้บันทึกในประวัติของเคส ว่าใครเปลี่ยนสถานะหรือแก้ไขอะไร เมื่อไร</p>
       <div class="field-group">
         <label for="nameInput">ชื่อผู้ทดสอบ</label>
         <input type="text" id="nameInput" placeholder="เช่น สมชาย ใจดี" maxlength="60" autocomplete="name">
@@ -652,61 +652,11 @@
         <button class="btn btn-primary" id="nameSaveBtn" type="button">เริ่มใช้งาน</button>
       </div>
       <div class="account-box" id="accountBox" style="display:none;">
-        <div>เข้าสู่ระบบด้วย <strong id="accountEmail"></strong> — ข้อมูลเก็บบน Supabase และแชร์กับสมาชิกโปรเจกต์</div>
+        <div>ข้อมูลเก็บบน Supabase — ทุกคนที่เปิดลิงก์นี้เห็นและแก้ไขข้อมูลชุดเดียวกัน</div>
         <div class="row">
           <button class="btn btn-ghost btn-sm" id="migrateBtn" type="button" style="display:none;">⬆ อัปโหลดโปรเจกต์ในเครื่องขึ้น Supabase</button>
-          <button class="btn btn-danger btn-sm" id="signOutBtn" type="button">ออกจากระบบ</button>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="authModal">
-    <div class="modal-box">
-      <div class="modal-head">
-        <h3 id="authTitle">เข้าสู่ระบบ QA Agent</h3>
-        <button class="modal-close" id="authCloseBtn" aria-label="ปิด">&times;</button>
-      </div>
-      <p class="modal-sub">เข้าสู่ระบบเพื่อเก็บโปรเจกต์บน Supabase ทำงานร่วมกับทีมแบบเรียลไทม์ และประทับ Approve ด้วยบัญชีจริง</p>
-      <div class="field-group" id="authNameGroup" style="display:none;">
-        <label for="authName">ชื่อที่แสดง</label>
-        <input type="text" id="authName" placeholder="เช่น สมชาย ใจดี" maxlength="60" autocomplete="name">
-      </div>
-      <div class="field-group">
-        <label for="authEmail">อีเมล</label>
-        <input type="text" id="authEmail" placeholder="you@company.com" autocomplete="email" inputmode="email">
-      </div>
-      <div class="field-group">
-        <label for="authPassword">รหัสผ่าน</label>
-        <input type="password" id="authPassword" placeholder="อย่างน้อย 6 ตัวอักษร" autocomplete="current-password">
-      </div>
-      <div class="conn-status" id="authStatus"></div>
-      <div class="modal-actions">
-        <button class="btn btn-primary" id="authSubmitBtn" type="button">เข้าสู่ระบบ</button>
-      </div>
-      <button class="link-btn" id="authToggle" type="button">ยังไม่มีบัญชี? สมัครใช้งาน</button>
-      <div class="auth-or">หรือ</div>
-      <button class="btn btn-ghost" id="authOfflineBtn" type="button" style="width:100%;">ใช้งานแบบออฟไลน์ (เก็บในเครื่องนี้เท่านั้น)</button>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="membersModal">
-    <div class="modal-box" style="max-width:540px;">
-      <div class="modal-head">
-        <h3>สมาชิกโปรเจกต์</h3>
-        <button class="modal-close" id="membersCloseBtn" aria-label="ปิด">&times;</button>
-      </div>
-      <p class="modal-sub" id="membersSub"></p>
-      <div id="membersList"></div>
-      <div class="member-add" id="membersAdd">
-        <input type="text" id="memberEmail" placeholder="อีเมลของสมาชิก (ต้องเคยเข้าสู่ระบบแล้ว)" inputmode="email">
-        <select id="memberRole" class="cell-select" style="width:auto;">
-          <option value="tester">Tester</option><option value="editor">Editor</option><option value="viewer">Viewer</option><option value="owner">Owner</option>
-        </select>
-        <button class="btn btn-blue btn-sm" id="memberAddBtn" type="button">+ เพิ่ม</button>
-      </div>
-      <div class="field-hint">Owner: จัดการสมาชิก ลบโปรเจกต์ · Editor: สร้าง/แก้/ลบเคส · Tester: ตั้งสถานะ ผลจริง หมายเหตุ Approve · Viewer: ดูอย่างเดียว</div>
-      <div class="conn-status" id="membersStatus"></div>
     </div>
   </div>
 
@@ -717,8 +667,6 @@
     <button class="btn btn-blue btn-sm" id="renameProjectBtn">แก้ไขชื่อ</button>
     <button class="btn btn-blue btn-sm" id="deleteProjectBtn">ลบโปรเจกต์</button>
     <button class="btn btn-blue btn-sm" id="saveProjectBtn">💾 บันทึกโปรเจกต์</button>
-    <button class="btn btn-blue btn-sm" id="membersBtn" style="display:none;">👥 สมาชิก</button>
-    <span class="role-chip" id="roleChip" style="display:none;"></span>
   </div>
 
   <div class="workspace">
@@ -784,8 +732,6 @@
           <button class="btn btn-blue btn-sm" id="reportBtn">📋 รายงานวิเคราะห์</button>
           <button class="btn btn-blue btn-sm" id="dashboardBtn">📊 แดชบอร์ด</button>
           <button class="btn btn-blue btn-sm" id="addManualBtn">+ เพิ่มเคสเอง</button>
-          <button class="btn btn-blue btn-sm" id="importExcelBtn" title="นำเข้าไฟล์ Excel ที่ Export จากระบบนี้ เป็นโปรเจกต์ใหม่">Import Excel</button>
-          <input type="file" id="importInput" accept=".xlsx,.xls" hidden>
           <button class="btn btn-blue btn-sm" id="exportExcelBtn">Export Excel</button>
           <button class="btn btn-blue btn-sm" id="clearAllBtn">ล้างทั้งหมด</button>
         </div>
@@ -808,9 +754,6 @@
         </select>
         <select id="fModule" class="opt-select f-sel" aria-label="กรอง Module"><option value="">ทุก Module</option></select>
         <select id="fType" class="opt-select f-sel" aria-label="กรอง Test Type"><option value="">ทุก Test Type</option></select>
-        <select id="fApprove" class="opt-select f-sel" aria-label="กรองการ Approve">
-          <option value="">Approve ทั้งหมด</option><option value="yes">Approve แล้ว</option><option value="no">ยังไม่ Approve</option>
-        </select>
         <select id="fSort" class="opt-select f-sel" aria-label="เรียงลำดับ">
           <option value="id:asc">เรียง: ID</option>
           <option value="priority:asc">เรียง: Priority สูง → ต่ำ</option>
@@ -823,13 +766,6 @@
         <button class="btn btn-ghost btn-sm" id="fClear" type="button">ล้างตัวกรอง</button>
       </div>
 
-      <div class="select-bar" id="selectBar" style="display:none;">
-        <span class="sel-count" id="selCount">ยังไม่ได้เลือกเคส</span>
-        <span class="sel-hint">เลือกสถานะผ่าน/ไม่ผ่าน → ติ๊กช่องหน้าเคส → กด Approve เพื่อประทับชื่อและเวลา</span>
-        <button class="btn btn-green btn-sm" id="approveSelBtn" disabled>✓ บันทึก & Approve</button>
-        <button class="btn btn-danger btn-sm" id="deleteSelBtn" disabled>ลบเคสที่เลือก</button>
-      </div>
-
       <div id="tcContainer">
         <div class="empty-state" id="emptyState">
           <p>ยังไม่มี test case</p>
@@ -839,7 +775,6 @@
           <table class="tc-table">
             <thead>
               <tr>
-                <th class="col-check"><input type="checkbox" class="all-check" id="allCheck" aria-label="เลือกทั้งหมด"></th>
                 <th>สถานะ</th>
                 <th>Test Case</th>
                 <th>เงื่อนไขที่ถูกทดสอบ</th>
@@ -850,7 +785,7 @@
                 <th>ผลลัพธ์จริง (Actual)</th>
                 <th>Priority / Severity</th>
                 <th>หมายเหตุ / Defect</th>
-                <th>Approve</th>
+                <th>จัดการ</th>
               </tr>
             </thead>
             <tbody id="tcList"></tbody>
@@ -860,13 +795,11 @@
           <table class="tc-table compact-table">
             <thead>
               <tr>
-                <th class="col-check"><input type="checkbox" class="all-check" id="allCheckC" aria-label="เลือกทั้งหมด"></th>
                 <th class="sortable" data-sort="status">สถานะ</th>
                 <th class="sortable col-id" data-sort="id">ID</th>
                 <th class="sortable" data-sort="title">ชื่อเคส</th>
                 <th class="sortable col-module" data-sort="module">Module</th>
                 <th class="sortable col-prio" data-sort="priority">Priority</th>
-                <th class="sortable col-approve" data-sort="approve">Approve</th>
                 <th class="col-open"></th>
               </tr>
             </thead>
@@ -1086,10 +1019,6 @@ function openNameModal(first){
   const cloud = typeof isCloud === 'function' && isCloud();
   el('accountBox').style.display = cloud ? 'flex' : 'none';
   if(cloud){
-    el('nameModalTitle').textContent = 'บัญชีของคุณ';
-    el('nameSaveBtn').textContent = 'บันทึกชื่อที่แสดง';
-    el('nameCloseBtn').style.display = 'block';
-    el('accountEmail').textContent = cloudUser.email || '';
     const hasLocal = ((localBackup && localBackup.projects) || []).some(p => (p.testCases || []).length);
     el('migrateBtn').style.display = hasLocal && store.get('qa-migrated') !== '1' ? '' : 'none';
   }
@@ -1099,14 +1028,6 @@ function openNameModal(first){
 function saveName(){
   const v = el('nameInput').value.trim();
   if(v.length < 2){ el('nameHint').textContent = 'กรุณาใส่ชื่ออย่างน้อย 2 ตัวอักษร'; return; }
-  if(typeof isCloud === 'function' && isCloud()){
-    supabaseClient.from('profiles').update({ display_name: v }).eq('id', cloudUser.id).then(({ error }) => {
-      if(error){ el('nameHint').textContent = 'บันทึกไม่สำเร็จ: ' + friendlyDbError(error); return; }
-      userName = v; renderUser(); nameModal.classList.remove('open');
-      showSuccess('เปลี่ยนชื่อที่แสดงเป็น ' + v + ' แล้ว');
-    });
-    return;
-  }
   userName = v;
   store.set(USER_KEY, userName);
   renderUser();
@@ -1549,17 +1470,15 @@ function fmtStamp(iso){
 }
 
 // ---------- render ----------
-const filters = { q:'', status:'', priority:'', type:'', approve:'', module:'' };
+const filters = { q:'', status:'', priority:'', type:'', module:'' };
 function matchesFilter(tc){
   if(filters.status && tc.result !== filters.status) return false;
   if(filters.priority && tc.priority !== filters.priority) return false;
   if(filters.type && normTestType(tc.testType) !== filters.type) return false;
   if(filters.module && moduleOf(tc) !== filters.module) return false;
-  if(filters.approve === 'yes' && !tc.approvedBy) return false;
-  if(filters.approve === 'no' && tc.approvedBy) return false;
   if(filters.q){
     const hay = [tcCode(tc), tc.title, tc.module, tc.reqRef, tc.condition, tc.preconditions,
-      Array.isArray(tc.steps) ? tc.steps.join(' ') : tc.steps, tc.testData, tc.expected, tc.actualResult, tc.remarks, tc.approvedBy]
+      Array.isArray(tc.steps) ? tc.steps.join(' ') : tc.steps, tc.testData, tc.expected, tc.actualResult, tc.remarks]
       .join(' ').toLowerCase();
     if(!filters.q.toLowerCase().split(/\s+/).filter(Boolean).every(w => hay.includes(w))) return false;
   }
@@ -1580,7 +1499,6 @@ function compareCases(a, b){
   else if(k === 'status') r = (STATUS_RANK[a.result] ?? 1) - (STATUS_RANK[b.result] ?? 1);
   else if(k === 'module') r = moduleOf(a).localeCompare(moduleOf(b), 'th');
   else if(k === 'title') r = String(a.title || '').localeCompare(String(b.title || ''), 'th');
-  else if(k === 'approve') r = (a.approvedBy ? 1 : 0) - (b.approvedBy ? 1 : 0);
   else if(k === 'updated') r = lastUpdated(a).localeCompare(lastUpdated(b));
   if(sortState.dir === 'desc') r = -r;
   return r || (a.num - b.num);
@@ -1633,22 +1551,21 @@ function syncTypeFilterOptions(){
   sel.value = filters.type;
 }
 function applyFilterUI(){
-  [['fStatus','status'],['fPriority','priority'],['fType','type'],['fApprove','approve'],['fModule','module']].forEach(([id, k]) => el(id).classList.toggle('on', !!filters[k]));
+  [['fStatus','status'],['fPriority','priority'],['fType','type'],['fModule','module']].forEach(([id, k]) => el(id).classList.toggle('on', !!filters[k]));
   el('fClear').style.display = filtersActive() ? 'inline-flex' : 'none';
 }
 function onFilterChange(){
   navOrder = [];
   const vis = new Set(visibleCases().map(t => t.id));
-  [...selected].forEach(id => { if(!vis.has(id)) selected.delete(id); }); // never act on rows the user can't see
   render();
 }
 let searchTimer = null;
 el('fSearch').addEventListener('input', e => { clearTimeout(searchTimer); searchTimer = setTimeout(() => { filters.q = e.target.value.trim(); onFilterChange(); }, 180); });
-[['fStatus','status'],['fPriority','priority'],['fType','type'],['fApprove','approve'],['fModule','module']].forEach(([id, k]) =>
+[['fStatus','status'],['fPriority','priority'],['fType','type'],['fModule','module']].forEach(([id, k]) =>
   el(id).addEventListener('change', e => { filters[k] = e.target.value; onFilterChange(); }));
 function clearFilters(){
   Object.keys(filters).forEach(k => filters[k] = '');
-  el('fSearch').value = ''; ['fStatus','fPriority','fType','fApprove','fModule'].forEach(id => el(id).value = '');
+  el('fSearch').value = ''; ['fStatus','fPriority','fType','fModule'].forEach(id => el(id).value = '');
 }
 el('fClear').addEventListener('click', () => { clearFilters(); onFilterChange(); });
 
@@ -1657,16 +1574,13 @@ function render(){
   emptyState.style.display = hasCases ? 'none' : 'block';
   el('tableWrap').style.display = hasCases && viewMode === 'full' ? 'block' : 'none';
   el('compactWrap').style.display = hasCases && viewMode === 'compact' ? 'block' : 'none';
-  el('selectBar').style.display = hasCases ? 'flex' : 'none';
   el('filterBar').style.display = hasCases ? 'flex' : 'none';
-  [...selected].forEach(id => { if(!testCases.some(t => t.id === id)) selected.delete(id); });
   syncTypeFilterOptions();
   syncModuleFilterOptions();
   applyFilterUI();
   syncSortUI();
   syncViewToggle();
   renderTableOnly();
-  renderSelectBar();
   renderDrawer();
   renderDashboard();
   renderReport();
@@ -1680,74 +1594,11 @@ function renderTableOnly(){
   vis.forEach(tc => body.appendChild(viewMode === 'compact' ? renderCompactRow(tc) : renderRow(tc, testCases.indexOf(tc))));
   if(testCases.length && !vis.length){
     const tr = document.createElement('tr'); tr.className = 'no-match';
-    const td = document.createElement('td'); td.colSpan = viewMode === 'compact' ? 8 : 12;
+    const td = document.createElement('td'); td.colSpan = viewMode === 'compact' ? 6 : 11;
     td.textContent = 'ไม่พบเคสที่ตรงกับตัวกรอง — ลองเปลี่ยนคำค้นหรือกด "ล้างตัวกรอง"';
     tr.appendChild(td); body.appendChild(tr);
   }
 }
-
-function renderSelectBar(){
-  const n = selected.size;
-  const picked = testCases.filter(t => selected.has(t.id));
-  const ready = picked.filter(t => t.result !== 'not_run').length;
-  const cnt = el('selCount');
-  if(!n) cnt.textContent = 'ยังไม่ได้เลือกเคส';
-  else {
-    cnt.innerHTML = `เลือกแล้ว ${n} เคส · <span class="ready">พร้อม Approve ${ready}</span>` +
-      (n - ready ? ` · <span class="skip">ยังไม่ได้ทดสอบ ${n - ready} (จะถูกข้าม)</span>` : '');
-  }
-  el('approveSelBtn').disabled = !n;
-  el('deleteSelBtn').disabled = !n;
-  el('approveSelBtn').textContent = n ? `✓ บันทึก & Approve (${ready})` : '✓ บันทึก & Approve';
-  el('approveSelBtn').title = n && !ready ? 'เคสที่เลือกยังไม่ได้ทดสอบ — ตั้งสถานะผ่าน/ไม่ผ่านก่อน' : '';
-  el('deleteSelBtn').textContent = n ? `ลบเคสที่เลือก (${n})` : 'ลบเคสที่เลือก';
-  el('selectBar').classList.toggle('active', n > 0);
-  const visN = visibleCases().length;
-  [el('allCheck'), el('allCheckC')].forEach(all => {
-    all.checked = visN > 0 && n === visN;
-    all.indeterminate = n > 0 && n < visN;
-  });
-}
-
-['allCheck','allCheckC'].forEach(id => el(id).addEventListener('change', e => {
-  selected = e.target.checked ? new Set(visibleCases().map(t => t.id)) : new Set();
-  [...tcList.querySelectorAll('tr'), ...el('tcListC').querySelectorAll('tr')].forEach(tr => {
-    const cb = tr.querySelector('.row-check');
-    if(cb) cb.checked = e.target.checked;
-    tr.classList.toggle('is-selected', e.target.checked);
-  });
-  renderSelectBar();
-}));
-
-function approveCases(list){
-  const now = new Date().toISOString();
-  list.forEach(t => { t.approvedBy = userName; t.approvedById = ''; t.approvedAt = now; logHistory(t, 'Approve', 'ผลการทดสอบ: ' + resultLabel(t.result)); });
-  return now;
-}
-el('approveSelBtn').addEventListener('click', () => {
-  if(!userName){ openNameModal(true); return; }
-  const picked = testCases.filter(t => selected.has(t.id));
-  const ready = picked.filter(t => t.result !== 'not_run');
-  const skipped = picked.length - ready.length;
-  if(!ready.length){
-    showError(`Approve ไม่ได้: ${picked.length} เคสที่เลือกยังเป็น "ยังไม่ได้ทดสอบ" ทั้งหมด — กดสถานะ ผ่าน หรือ ไม่ผ่าน ของแต่ละเคสก่อน แล้วค่อยกด Approve`);
-    return;
-  }
-  const now = approveCases(ready);
-  ready.forEach(t => selected.delete(t.id));
-  render(); saveState();
-  showSuccess(`Approve แล้ว ${ready.length} เคส โดย ${userName} เวลา ${fmtStamp(now)}` +
-    (skipped ? ` · ข้าม ${skipped} เคสที่ยังไม่ได้ทดสอบ (ยังติ๊กค้างไว้)` : ''));
-});
-
-el('deleteSelBtn').addEventListener('click', () => {
-  const n = selected.size; if(!n) return;
-  if(!confirm(`ลบ ${n} เคสที่เลือกใช่หรือไม่? ย้อนกลับไม่ได้`)) return;
-  testCases = testCases.filter(t => !selected.has(t.id));
-  selected = new Set();
-  render(); saveState();
-  showSuccess(`ลบแล้ว ${n} เคส`);
-});
 
 function reportSection(num, title, items, opts = {}){
   const list = Array.isArray(items) ? items.filter(Boolean) : [];
@@ -1815,7 +1666,6 @@ function renderDashboard(){
   const fail = testCases.filter(t => t.result === 'fail').length;
   const notRun = total - pass - fail;
   const executed = pass + fail;
-  const approved = testCases.filter(t => t.approvedBy).length;
   const passRate = executed ? Math.round(pass / executed * 100) : 0;
 
   const tech = { bva:0, ep:0, state:0, edge:0 };
@@ -1828,7 +1678,7 @@ function renderDashboard(){
     [passRate + '%', `Pass Rate (${executed}/${total} ทดสอบแล้ว)`],
     [fail, 'ไม่ผ่าน'],
     [notRun, 'ยังไม่ได้ทดสอบ'],
-    [approved + '/' + total, 'Approve แล้ว']
+    [pass, 'ผ่าน']
   ].map(([n, l]) => `<div class="dash-metric"><div class="m-num">${n}</div><div class="m-lbl">${l}</div></div>`).join('');
 
   const bars = (title, entries, colors, max, labelFn) => `<div class="dash-section"><h4>${title}</h4>${entries.map(([k, c]) => `
@@ -1849,7 +1699,10 @@ function renderDashboard(){
     ${bars('แบ่งตามเทคนิค', Object.entries(tech), TECHNIQUE_COLORS, maxT, techniqueLabel)}
     ${bars('แบ่งตามความสำคัญ', Object.entries(prio), PRIORITY_COLORS, maxP, k => ({high:'สูง', medium:'กลาง', low:'ต่ำ'}[k]))}
     ${donut('ผลการทดสอบ', [{label:'ผ่าน', count:pass, color:'var(--green)'}, {label:'ไม่ผ่าน', count:fail, color:'var(--red)'}, {label:'ยังไม่ได้ทดสอบ', count:notRun, color:'var(--line)'}])}
-    ${donut('การ Approve', [{label:'Approve แล้ว', count:approved, color:'var(--blueprint)'}, {label:'ยังไม่ Approve', count:total - approved, color:'var(--line)'}])}
+    ${(() => { const mods = {}; testCases.forEach(t => { const m = moduleOf(t); mods[m] = (mods[m] || 0) + 1; });
+       const top = Object.entries(mods).sort((a, b) => b[1] - a[1]).slice(0, 5);
+       const colors = Object.fromEntries(top.map(([m]) => [m, 'var(--violet)']));
+       return bars('แบ่งตาม Module', top, colors, Math.max(...top.map(x => x[1]), 1), m => escapeHtml(m.length > 10 ? m.slice(0, 9) + '…' : m)); })()}
   </div>`;
 }
 el('dashboardBtn').addEventListener('click', () => {
@@ -1889,30 +1742,12 @@ function setResult(tc, result){
   if(!userName){ openNameModal(true); return; }
   logHistory(tc, 'เปลี่ยนสถานะ', resultLabel(tc.result) + ' → ' + resultLabel(result), { from: tc.result, to: result });
   tc.result = result;
-  if(tc.approvedBy){ // stamp no longer matches the new result
-    logHistory(tc, 'ยกเลิก Approve', `เดิม Approve โดย ${tc.approvedBy} — สถานะเปลี่ยนจึงต้อง Approve ใหม่`);
-    tc.approvedBy = ''; tc.approvedAt = '';
-  }
   render(); saveState();
 }
 
 function renderRow(tc, idx){
   const tr = document.createElement('tr');
-  tr.className = 'res-' + tc.result + (selected.has(tc.id) ? ' is-selected' : '');
-
-  // checkbox
-  const tdCheck = document.createElement('td');
-  tdCheck.className = 'col-check';
-  const cb = document.createElement('input');
-  cb.type = 'checkbox'; cb.className = 'row-check'; cb.checked = selected.has(tc.id);
-  cb.setAttribute('aria-label', 'เลือก ' + tcCode(tc));
-  cb.addEventListener('change', () => {
-    if(cb.checked) selected.add(tc.id); else selected.delete(tc.id);
-    tr.classList.toggle('is-selected', cb.checked);
-    renderSelectBar();
-  });
-  tdCheck.appendChild(cb);
-  tr.appendChild(tdCheck);
+  tr.className = 'res-' + tc.result;
 
   // status (one-click, checkbox-style)
   const tdStatus = document.createElement('td');
@@ -1988,17 +1823,9 @@ function renderRow(tc, idx){
 
   addTextCell('cell-remarks', 'remarks', tc.remarks);
 
-  // approve stamp + delete
+  // history + delete
   const tdApprove = document.createElement('td');
   const wrap = document.createElement('div'); wrap.className = 'approve-cell';
-  if(tc.approvedBy){
-    const s = document.createElement('div'); s.className = 'stamp-ok';
-    s.innerHTML = `<strong>✓ ${escapeHtml(tc.approvedBy)}</strong>${escapeHtml(fmtStamp(tc.approvedAt))}`;
-    wrap.appendChild(s);
-  } else {
-    const s = document.createElement('span'); s.className = 'stamp-none'; s.textContent = 'ยังไม่ Approve';
-    wrap.appendChild(s);
-  }
   const actions = document.createElement('div'); actions.className = 'row-actions';
   const hist = document.createElement('button');
   hist.type = 'button'; hist.className = 'del-btn'; hist.textContent = histLabel(tc);
@@ -2008,7 +1835,6 @@ function renderRow(tc, idx){
   del.addEventListener('click', () => {
     if(!confirm(`ลบ "${tcCode(tc)} — ${tc.title}" ใช่หรือไม่?`)) return;
     testCases = testCases.filter(t => t.id !== tc.id);
-    selected.delete(tc.id);
     render(); saveState();
   });
   actions.append(hist, del);
@@ -2043,18 +1869,8 @@ function makeStatusSeg(tc, cls){
 
 function renderCompactRow(tc){
   const tr = document.createElement('tr');
-  tr.className = 'res-' + tc.result + (selected.has(tc.id) ? ' is-selected' : '') + (drawerId === tc.id ? ' is-open' : '');
+  tr.className = 'res-' + tc.result + (drawerId === tc.id ? ' is-open' : '');
   tr.addEventListener('click', e => { if(!e.target.closest('button, input, select, a')) openDrawer(tc.id); });
-
-  const tdC = document.createElement('td'); tdC.className = 'col-check';
-  const cb = document.createElement('input');
-  cb.type = 'checkbox'; cb.className = 'row-check'; cb.checked = selected.has(tc.id);
-  cb.setAttribute('aria-label', 'เลือก ' + tcCode(tc));
-  cb.addEventListener('change', () => {
-    if(cb.checked) selected.add(tc.id); else selected.delete(tc.id);
-    tr.classList.toggle('is-selected', cb.checked); renderSelectBar();
-  });
-  tdC.appendChild(cb); tr.appendChild(tdC);
 
   const tdS = document.createElement('td'); tdS.appendChild(makeStatusSeg(tc, 'c-status')); tr.appendChild(tdS);
 
@@ -2078,12 +1894,6 @@ function renderCompactRow(tc){
   const tdP = document.createElement('td');
   const pb = document.createElement('span'); pb.className = 'prio-badge'; pb.style.color = PRIO_COLOR[tc.priority] || 'var(--ink-dim)';
   pb.textContent = PRIO_TEXT[tc.priority] || tc.priority; tdP.appendChild(pb); tr.appendChild(tdP);
-
-  const tdA = document.createElement('td');
-  const ap = document.createElement('div');
-  if(tc.approvedBy){ ap.className = 'c-approve'; ap.textContent = '✓ ' + tc.approvedBy; const d = document.createElement('div'); d.style.color = 'var(--ink-faint)'; d.textContent = fmtStamp(tc.approvedAt); ap.appendChild(d); }
-  else { ap.className = 'c-approve none'; ap.textContent = '—'; }
-  tdA.appendChild(ap); tr.appendChild(tdA);
 
   const tdO = document.createElement('td');
   const ob = document.createElement('button'); ob.type = 'button'; ob.className = 'open-btn'; ob.textContent = 'ดู ›';
@@ -2196,26 +2006,6 @@ function renderDrawer(){
   body.appendChild(field('ผลลัพธ์จริง (Actual)', ta('actualResult', tc.actualResult, 'สิ่งที่เกิดขึ้นจริงตอนทดสอบ'), 'actual'));
   body.appendChild(field('หมายเหตุ / Defect', ta('remarks', tc.remarks, 'เช่น BUG-123')));
 
-  const apv = document.createElement('div'); apv.className = 'd-approve';
-  if(tc.approvedBy){
-    const st = document.createElement('div'); st.className = 'stamp-ok';
-    st.innerHTML = `<strong>✓ Approve โดย ${escapeHtml(tc.approvedBy)}</strong>${escapeHtml(fmtStamp(tc.approvedAt))}`;
-    apv.appendChild(st);
-  } else {
-    const st = document.createElement('span'); st.className = 'stamp-none';
-    st.textContent = tc.result === 'not_run' ? 'ตั้งสถานะผ่านหรือไม่ผ่านก่อน จึงจะ Approve ได้' : 'ยังไม่ Approve';
-    const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'btn btn-green btn-sm';
-    btn.textContent = '✓ Approve เคสนี้'; btn.disabled = tc.result === 'not_run';
-    btn.addEventListener('click', () => {
-      if(!userName){ openNameModal(true); return; }
-      const now = approveCases([tc]);
-      render(); saveState();
-      showSuccess(`Approve ${tcCode(tc)} แล้ว โดย ${userName} เวลา ${fmtStamp(now)}`);
-    });
-    apv.append(st, btn);
-  }
-  body.appendChild(apv);
-
   const foot = el('drawerFoot'); foot.innerHTML = '';
   const prev = document.createElement('button'); prev.type = 'button'; prev.className = 'btn btn-ghost btn-sm'; prev.textContent = '‹ ก่อนหน้า';
   prev.disabled = pos <= 0; prev.addEventListener('click', () => stepDrawer(-1));
@@ -2225,7 +2015,7 @@ function renderDrawer(){
   del.addEventListener('click', () => {
     if(!confirm(`ลบ "${tcCode(tc)} — ${tc.title}" ใช่หรือไม่?`)) return;
     const nextCase = vis[pos + 1] || vis[pos - 1];
-    testCases = testCases.filter(t => t.id !== tc.id); selected.delete(tc.id);
+    testCases = testCases.filter(t => t.id !== tc.id);
     drawerId = nextCase ? nextCase.id : null;
     navOrder = navOrder.filter(id => id !== tc.id);
     if(!drawerId){ drawer.classList.remove('open'); drawerBackdrop.classList.remove('open'); }
@@ -2294,13 +2084,13 @@ el('clearAllBtn').addEventListener('click', () => {
 // ---------- Excel export ----------
 function buildExportRows(){
   const header = [
-    'Test Case ID','สถานะ','Approved By','Approved At','Module / Feature','Test Scenario','Preconditions','Test Steps','Test Data','Expected Result',
+    'Test Case ID','สถานะ','Module / Feature','Test Scenario','Preconditions','Test Steps','Test Data','Expected Result',
     'Actual Result','Priority','Severity','Test Type','หมายเหตุ / Defect','Source','Req Ref','เงื่อนไขที่ถูกทดสอบ','เทคนิค','Case Type','Notes (AI)','ประวัติ'
   ];
   const proj = getActiveProject();
   const defaultModule = (proj && proj.analysis && proj.analysis.module) || '';
   const rows = testCases.map(tc => [
-    tcCode(tc), resultLabel(tc.result), tc.approvedBy || '', fmtStamp(tc.approvedAt),
+    tcCode(tc), resultLabel(tc.result),
     tc.module || defaultModule, tc.title, tc.preconditions || '',
     Array.isArray(tc.steps) ? tc.steps.map((s,i) => `${i+1}. ${s}`).join('\n') : (tc.steps || ''),
     tc.testData || '', tc.expected || '', tc.actualResult || '',
@@ -2333,7 +2123,7 @@ el('exportExcelBtn').addEventListener('click', async () => {
   testCases.forEach(t => { delete t._exportHistory; });
   const wsCases = XLSX.utils.aoa_to_sheet([header, ...rows]);
   wsCases['!cols'] = [
-    { wch:10 },{ wch:14 },{ wch:18 },{ wch:20 },{ wch:18 },{ wch:32 },{ wch:28 },{ wch:42 },{ wch:24 },{ wch:36 },
+    { wch:10 },{ wch:14 },{ wch:18 },{ wch:32 },{ wch:28 },{ wch:42 },{ wch:24 },{ wch:36 },
     { wch:36 },{ wch:12 },{ wch:10 },{ wch:14 },{ wch:28 },{ wch:20 },{ wch:22 },{ wch:30 },{ wch:24 },{ wch:10 },{ wch:28 },{ wch:50 }
   ];
   header.forEach((_, c) => { const r = XLSX.utils.encode_cell({ r:0, c }); if(wsCases[r]) wsCases[r].s = headerStyle; });
@@ -2350,7 +2140,6 @@ el('exportExcelBtn').addEventListener('click', async () => {
   const pass = testCases.filter(t => t.result === 'pass').length;
   const fail = testCases.filter(t => t.result === 'fail').length;
   const notRun = total - pass - fail;
-  const approved = testCases.filter(t => t.approvedBy).length;
   const pct = n => total ? Math.round(n / total * 100) + '%' : '0%';
   const summaryRows = [
     ['Test Summary Report'],
@@ -2362,12 +2151,11 @@ el('exportExcelBtn').addEventListener('click', async () => {
     ['ผ่าน', pass, pct(pass)],
     ['ไม่ผ่าน', fail, pct(fail)],
     ['ยังไม่ได้ทดสอบ', notRun, pct(notRun)],
-    ['Approve แล้ว', approved, pct(approved)],
     [],
     ['เคสที่ไม่ผ่าน'],
-    ['TC ID', 'ชื่อเคส', 'Approved By', 'หมายเหตุ / Defect']
+    ['TC ID', 'ชื่อเคส', 'ผลลัพธ์จริง', 'หมายเหตุ / Defect']
   ];
-  testCases.filter(t => t.result === 'fail').forEach(t => summaryRows.push([tcCode(t), t.title, t.approvedBy || '-', t.remarks || '']));
+  testCases.filter(t => t.result === 'fail').forEach(t => summaryRows.push([tcCode(t), t.title, t.actualResult || '', t.remarks || '']));
   const wsSummary = XLSX.utils.aoa_to_sheet(summaryRows);
   wsSummary['!cols'] = [{ wch:18 }, { wch:36 }, { wch:18 }, { wch:40 }];
   const t0 = wsSummary['A1']; if(t0) t0.s = { font:{ color:{ rgb:'2563EB' }, bold:true, sz:14 } };
@@ -2405,14 +2193,6 @@ el('exportExcelBtn').addEventListener('click', async () => {
   }
   XLSX.utils.book_append_sheet(wb, wsCases, 'Test Cases');
 
-  // Backup sheet: lets "Import Excel" restore history, analysis and requirement exactly
-  const backup = JSON.stringify({ app:'qa-agent', version:1, exportedAt:new Date().toISOString(),
-    project:{ name:projName, requirement: proj ? proj.requirement || '' : '', analysis: proj ? proj.analysis || null : null, counter },
-    cases: testCases });
-  const bRows = [['ข้อมูลสำรองสำหรับ Import Excel — ห้ามแก้ไขชีตนี้ (แก้ข้อมูลในชีต Test Cases ได้ตามปกติ)']];
-  for(let i = 0; i < backup.length; i += 30000) bRows.push([backup.slice(i, i + 30000)]);
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(bRows), BACKUP_SHEET);
-
   const filename = getExportFilename();
   const downloads = await getCap('downloads');
   if(downloads){
@@ -2428,124 +2208,6 @@ el('exportExcelBtn').addEventListener('click', async () => {
     XLSX.writeFile(wb, filename);
   }
 });
-
-// ---------- Import Excel (restore / move between computers) ----------
-const BACKUP_SHEET = 'Backup (ห้ามแก้ไข)';
-el('importExcelBtn').addEventListener('click', () => el('importInput').click());
-el('importInput').addEventListener('change', async e => {
-  const file = e.target.files[0];
-  e.target.value = '';
-  if(!file) return;
-  hideError(); hideSuccess();
-  try{
-    if(typeof XLSX === 'undefined') throw new Error('โหลดไลบรารี Excel ไม่สำเร็จ ลองรีเฟรชหน้า');
-    const wb = XLSX.read(await file.arrayBuffer(), { type:'array' });
-    const result = importWorkbook(wb, file.name);
-    showSuccess(`นำเข้า "${file.name}" เป็นโปรเจกต์ "${result.name}" แล้ว (${result.count} เคส${result.fromBackup ? ', กู้ประวัติและรายงานครบ' : ''})`);
-  }catch(err){
-    showError('นำเข้าไม่สำเร็จ: ' + err.message);
-  }
-});
-
-function importWorkbook(wb, fileName){
-  // 1) backup JSON (exact restore of fields not shown in the table)
-  let backup = null;
-  if(wb.Sheets[BACKUP_SHEET]){
-    try{
-      const rows = XLSX.utils.sheet_to_json(wb.Sheets[BACKUP_SHEET], { header:1, defval:'' });
-      const data = JSON.parse(rows.slice(1).map(r => String(r[0] || '')).join(''));
-      if(data && data.app === 'qa-agent') backup = data;
-    }catch(e){ backup = null; }
-  }
-  const byCode = new Map();
-  if(backup) (backup.cases || []).forEach(c => byCode.set('TC_' + String(c.num).padStart(2, '0'), c));
-
-  // 2) Test Cases sheet is the source of truth for editable columns
-  const sheetName = wb.SheetNames.find(n => {
-    const first = XLSX.utils.sheet_to_json(wb.Sheets[n], { header:1, defval:'' })[0] || [];
-    return first.map(String).includes('Test Case ID');
-  });
-  let cases = [];
-  if(sheetName){
-    const rows = XLSX.utils.sheet_to_json(wb.Sheets[sheetName], { header:1, defval:'' });
-    const head = rows[0].map(h => String(h).trim());
-    const col = name => head.indexOf(name);
-    const get = (r, name) => { const i = col(name); return i < 0 ? undefined : String(r[i] == null ? '' : r[i]).trim(); };
-    rows.slice(1).forEach(r => {
-      const code = get(r, 'Test Case ID') || '';
-      const title = get(r, 'Test Scenario') || '';
-      if(!code && !title) return;
-      const base = byCode.has(code) ? JSON.parse(JSON.stringify(byCode.get(code))) : {};
-      const tc = normalizeCase(Object.assign({ technique:'ep', caseType:'positive', history:[] }, base));
-      const setIf = (field, name, fn) => { const v = get(r, name); if(v !== undefined) tc[field] = fn ? fn(v) : v; };
-      setIf('title', 'Test Scenario');
-      setIf('module', 'Module / Feature');
-      setIf('preconditions', 'Preconditions');
-      setIf('steps', 'Test Steps', v => v.split(/\n/).map(l => l.replace(/^\d+\.\s*/, '').trim()).filter(Boolean));
-      setIf('testData', 'Test Data');
-      setIf('expected', 'Expected Result');
-      setIf('actualResult', 'Actual Result');
-      setIf('remarks', 'หมายเหตุ / Defect');
-      setIf('reqRef', 'Req Ref');
-      setIf('condition', 'เงื่อนไขที่ถูกทดสอบ');
-      setIf('source', 'Source', normSource);
-      setIf('testType', 'Test Type', normTestType);
-      setIf('notes', 'Notes (AI)');
-      setIf('priority', 'Priority', v => /high|p1|สูง/i.test(v) ? 'high' : /low|p3|ต่ำ/i.test(v) ? 'low' : 'medium');
-      setIf('severity', 'Severity', v => SEVERITIES.includes(v.toLowerCase()) ? v.toLowerCase() : 'major');
-      setIf('technique', 'เทคนิค', v => /^bva|boundary/i.test(v) ? 'bva' : /^state/i.test(v) ? 'state' : /^edge/i.test(v) ? 'edge' : 'ep');
-      setIf('caseType', 'Case Type', v => /neg/i.test(v) ? 'negative' : /edge/i.test(v) ? 'edge' : 'positive');
-      setIf('result', 'สถานะ', v => /ไม่ผ่าน|fail/i.test(v) ? 'fail' : /ผ่าน|pass/i.test(v) ? 'pass' : 'not_run');
-      const who = get(r, 'Approved By');
-      if(who !== undefined){
-        if(!who){ tc.approvedBy = ''; tc.approvedAt = ''; }
-        else if(who !== base.approvedBy || tc.result !== base.result){ tc.approvedBy = who; tc.approvedAt = base.approvedAt || ''; }
-      }
-      const m = code.match(/(\d+)/);
-      tc.num = m ? +m[1] : (base.num || 0);
-      cases.push(tc);
-    });
-  } else if(backup){
-    cases = (backup.cases || []).map(c => normalizeCase(JSON.parse(JSON.stringify(c))));
-  } else {
-    throw new Error('ไม่พบชีต "Test Cases" — ใช้ไฟล์ที่ Export จากระบบนี้เท่านั้น');
-  }
-  if(!cases.length) throw new Error('ไม่พบ test case ในไฟล์');
-
-  // renumber cleanly, give fresh ids, and log the import
-  let maxNum = Math.max(0, ...cases.map(c => c.num || 0));
-  const used = new Set();
-  cases.forEach(c => {
-    if(!c.num || used.has(c.num)) c.num = ++maxNum;
-    used.add(c.num);
-    c.id = 'tc_' + Date.now() + '_' + c.num + '_' + Math.random().toString(36).slice(2,5);
-    delete c.dbId; c.approvedById = ''; c.dbFailCount = 0; c.origin = 'import';
-    if(typeof isCloud === 'function' && isCloud()){ c.approvedBy = ''; c.approvedAt = ''; }
-    logHistory(c, 'นำเข้าจาก Excel', fileName);
-  });
-
-  let baseName = (backup && backup.project && backup.project.name) || '';
-  if(!baseName && wb.Sheets['Summary']){
-    const cell = wb.Sheets['Summary']['B2']; baseName = cell ? String(cell.v) : '';
-  }
-  baseName = (baseName || fileName.replace(/\.[^.]+$/, '')).trim();
-  let name = baseName + ' (นำเข้า)', n = 2;
-  while(projectsData.projects.some(p => p.name === name)) name = `${baseName} (นำเข้า ${n++})`;
-
-  syncActiveProjectFromGlobals();
-  const proj = {
-    id: genId('proj'), name,
-    requirement: (backup && backup.project && backup.project.requirement) || '',
-    analysis: (backup && backup.project && backup.project.analysis) || null,
-    testCases: cases.sort((a, b) => a.num - b.num),
-    _loaded: true, _snap: new Map(),
-    counter: Math.max(maxNum, (backup && backup.project && backup.project.counter) || 0)
-  };
-  projectsData.projects.push(proj);
-  projectsData.activeProjectId = proj.id;
-  loadGlobalsFromActiveProject(); resetPanelsOnProjectSwitch(); render(); saveState();
-  return { name, count: cases.length, fromBackup: !!backup };
-}
 
 // ---------- AI helpers ----------
 function parseJsonLoose(text, expect){
@@ -2847,26 +2509,25 @@ genBtn.addEventListener('click', async () => {
 });
 
 // =====================================================================
-// Supabase (cloud mode) — ใช้ได้เมื่อเปิดไฟล์ .html ในเครื่อง
+// Supabase (ไม่ต้อง Login) — ทุกคนที่เปิดหน้านี้เห็นข้อมูลชุดเดียวกัน
+// ใช้ได้เมื่อเปิดจากเว็บของตัวเอง (เช่น Netlify) หรือไฟล์ในเครื่อง
 // หน้าที่เผยแพร่บน claude.ai บล็อกการเรียกเว็บภายนอก จึงทำงานแบบออฟไลน์
 // =====================================================================
 const SUPABASE_URL = 'https://yruykyderjkxtjhcywhm.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_XbTsjbt2XCvnOoslZeBCVA_eiPSBCgj';
 let supabaseClient = null;   // ห้ามตั้งชื่อ "supabase" — ชนกับ global ของไลบรารี CDN
 let appMode = 'local';       // 'local' | 'cloud'
-let cloudUser = null;
-let myRoles = {};
 let rtChannel = null, rtProjectId = null;
 let localBackup = null;
 const knownProjectIds = new Set();
 
-const ROLE_LABEL = { owner:'Owner', editor:'Editor', tester:'Tester', viewer:'Viewer' };
 const HISTORY_ACTION_LABEL = { created:'สร้างเคส', imported:'นำเข้าจาก Excel', status_changed:'เปลี่ยนสถานะ', approved:'Approve', approval_cancelled:'ยกเลิก Approve', edited:'แก้ไข', deleted:'ลบเคส' };
 const CASE_COLS = { title:'title', module:'module', reqRef:'req_ref', source:'source', technique:'technique', caseType:'case_type',
   testType:'test_type', condition:'condition', preconditions:'preconditions', steps:'steps', testData:'test_data', expected:'expected',
   actualResult:'actual_result', priority:'priority', severity:'severity', notes:'notes', depth:'depth', result:'result', remarks:'remarks' };
 
-function isCloud(){ return appMode === 'cloud' && !!cloudUser && !!supabaseClient; }
+function isCloud(){ return appMode === 'cloud' && !!supabaseClient; }
+function actorName(){ return (userName || '').slice(0, 60); }
 
 function caseToRow(tc){
   const row = {};
@@ -2879,7 +2540,6 @@ function caseToRow(tc){
   row.test_type = normTestType(tc.testType);
   row.source = normSource(tc.source);
   if(!['uat','qa','deep'].includes(row.depth)) row.depth = 'qa';
-  row.approved_by = tc.approvedBy ? (tc.approvedById || cloudUser.id) : null;
   return row;
 }
 function rowToCase(r){
@@ -2888,23 +2548,21 @@ function rowToCase(r){
     technique: r.technique, caseType: r.case_type, testType: r.test_type, condition: r.condition,
     preconditions: r.preconditions, steps: r.steps || [], testData: r.test_data, expected: r.expected,
     actualResult: r.actual_result, priority: r.priority, severity: r.severity, notes: r.notes, depth: r.depth,
-    origin: r.origin, result: r.result, remarks: r.remarks,
-    approvedBy: r.approved_by ? (r.approved_by_name || 'ผู้ใช้') : '', approvedById: r.approved_by || '',
-    approvedAt: r.approved_at || '', dbFailCount: r.fail_count || 0, history: []
+    origin: r.origin, result: r.result, remarks: r.remarks, dbFailCount: r.fail_count || 0, history: []
   });
 }
 function casesOf(proj){ return proj.id === projectsData.activeProjectId ? testCases : (proj.testCases || []); }
 function setCasesOf(proj, arr){ proj.testCases = arr; if(proj.id === projectsData.activeProjectId) testCases = arr; }
 function remapCaseId(oldId, newId){
-  if(selected.has(oldId)){ selected.delete(oldId); selected.add(newId); }
   if(drawerId === oldId) drawerId = newId;
   navOrder = navOrder.map(id => id === oldId ? newId : id);
 }
 function friendlyDbError(e){
   const m = (e && (e.message || e.error_description)) || String(e || '');
-  if(e && e.code === 'PGRST116') return 'ไม่มีสิทธิ์แก้ไขรายการนี้';
-  if(/row-level security/i.test(m)) return 'ไม่มีสิทธิ์ทำรายการนี้ในโปรเจกต์นี้';
+  if(e && e.code === 'PGRST116') return 'ไม่พบรายการนี้ในฐานข้อมูล (อาจถูกลบไปแล้ว)';
+  if(/row-level security|permission denied/i.test(m)) return 'ฐานข้อมูลยังไม่เปิดสิทธิ์แบบไม่ต้อง Login — รันไฟล์ qa-agent-supabase-no-login.sql ใน Supabase ก่อน';
   if(/Failed to fetch|NetworkError|Load failed/i.test(m)) return 'ติดต่อ Supabase ไม่ได้ ตรวจสอบอินเทอร์เน็ต';
+  if(/actor_name|delete_test_cases/i.test(m)) return 'ฐานข้อมูลยังไม่ได้อัปเดต — รันไฟล์ qa-agent-supabase-no-login.sql ใน Supabase ก่อน';
   return m;
 }
 
@@ -2922,121 +2580,44 @@ function setCloudStatus(state, detail){
   const dot = el('cloudDot'), label = el('cloudLabel');
   dot.className = 'dot' + (state === 'saved' ? ' on' : state === 'saving' ? ' saving' : state === 'error' ? ' err' : '');
   label.textContent = {
-    local: IN_CLAUDE ? 'ออฟไลน์ (claude.ai)' : 'ออฟไลน์ · เชื่อม Supabase',
+    local: IN_CLAUDE ? 'ออฟไลน์ (claude.ai)' : 'ออฟไลน์ · กดเพื่อเชื่อมต่อ',
     saving: detail || 'กำลังบันทึก...',
     saved: 'Supabase · บันทึกแล้ว',
     error: 'บันทึกไม่สำเร็จ'
   }[state] || state;
   el('cloudBtn').title = state === 'error' && detail ? detail
-    : state === 'local' ? (IN_CLAUDE ? 'หน้าบน claude.ai เชื่อม Supabase ไม่ได้ — ดาวน์โหลดไฟล์ .html ไปเปิดในเครื่อง' : 'คลิกเพื่อเข้าสู่ระบบ Supabase')
-    : (cloudUser ? cloudUser.email : '');
+    : state === 'local' ? (IN_CLAUDE ? 'หน้าบน claude.ai เชื่อม Supabase ไม่ได้ — เปิดจากเว็บของคุณหรือไฟล์ในเครื่อง' : 'คลิกเพื่อเชื่อมต่อ Supabase อีกครั้ง')
+    : 'ข้อมูลเก็บบน Supabase — ทุกคนที่เปิดลิงก์นี้เห็นข้อมูลชุดเดียวกัน';
 }
 el('cloudBtn').addEventListener('click', () => {
   if(isCloud()) openNameModal(false);
-  else if(IN_CLAUDE) showError('หน้านี้เปิดอยู่บน claude.ai ซึ่งบล็อกการเชื่อมต่อภายนอก — ดาวน์โหลดไฟล์ .html ไปเปิดในเบราว์เซอร์บนเครื่องเพื่อใช้ Supabase');
-  else openAuthModal();
-});
-function renderRoleChip(){
-  const chip = el('roleChip'), btn = el('membersBtn');
-  if(!isCloud()){ chip.style.display = 'none'; btn.style.display = 'none'; return; }
-  const p = getActiveProject();
-  const role = p && (myRoles[p.dbId] || (!p.dbId ? 'owner' : ''));
-  chip.style.display = role ? '' : 'none';
-  chip.textContent = 'สิทธิ์: ' + (ROLE_LABEL[role] || '-');
-  btn.style.display = p && p.dbId ? '' : 'none';
-}
-
-// ---------- auth ----------
-const authModal = el('authModal');
-let authSignup = false;
-function openAuthModal(){
-  authSignup = false; renderAuthMode();
-  el('authStatus').className = 'conn-status';
-  authModal.classList.add('open');
-  setTimeout(() => el('authEmail').focus(), 50);
-}
-function renderAuthMode(){
-  el('authTitle').textContent = authSignup ? 'สมัครใช้งาน QA Agent' : 'เข้าสู่ระบบ QA Agent';
-  el('authNameGroup').style.display = authSignup ? '' : 'none';
-  el('authSubmitBtn').textContent = authSignup ? 'สมัครใช้งาน' : 'เข้าสู่ระบบ';
-  el('authToggle').textContent = authSignup ? 'มีบัญชีแล้ว? เข้าสู่ระบบ' : 'ยังไม่มีบัญชี? สมัครใช้งาน';
-  el('authPassword').autocomplete = authSignup ? 'new-password' : 'current-password';
-}
-function authMsg(kind, text){ const s = el('authStatus'); s.className = 'conn-status show ' + kind; s.textContent = text; }
-el('authToggle').addEventListener('click', () => { authSignup = !authSignup; renderAuthMode(); el('authStatus').className = 'conn-status'; });
-el('authCloseBtn').addEventListener('click', () => { authModal.classList.remove('open'); if(!isCloud() && !userName) openNameModal(true); });
-el('authOfflineBtn').addEventListener('click', () => {
-  store.set('qa-offline', '1');
-  authModal.classList.remove('open');
-  if(!userName) openNameModal(true);
-});
-['authEmail','authPassword','authName'].forEach(id => el(id).addEventListener('keydown', e => { if(e.key === 'Enter') el('authSubmitBtn').click(); }));
-el('authSubmitBtn').addEventListener('click', async () => {
-  const email = el('authEmail').value.trim(), password = el('authPassword').value, name = el('authName').value.trim();
-  if(!/^\S+@\S+\.\S+$/.test(email)) return authMsg('fail', 'กรุณาใส่อีเมลให้ถูกต้อง');
-  if(password.length < 6) return authMsg('fail', 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร');
-  if(authSignup && name.length < 2) return authMsg('fail', 'กรุณาใส่ชื่อที่แสดงอย่างน้อย 2 ตัวอักษร');
-  const btn = el('authSubmitBtn'); btn.disabled = true;
-  authMsg('testing', authSignup ? 'กำลังสมัคร...' : 'กำลังเข้าสู่ระบบ...');
-  try{
-    const res = authSignup
-      ? await supabaseClient.auth.signUp({ email, password, options: { data: { full_name: name } } })
-      : await supabaseClient.auth.signInWithPassword({ email, password });
-    if(res.error){
-      const m = res.error.message || '';
-      authMsg('fail', /Invalid login/i.test(m) ? 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'
-        : /not confirmed/i.test(m) ? 'ยังไม่ได้ยืนยันอีเมล — เปิดลิงก์ยืนยันในอีเมลก่อน แล้วกลับมาเข้าสู่ระบบ'
-        : /already registered/i.test(m) ? 'อีเมลนี้สมัครไว้แล้ว — กดเข้าสู่ระบบแทน'
-        : friendlyDbError(res.error));
-      return;
-    }
-    if(!res.data.session){
-      authMsg('ok', 'สมัครสำเร็จ — ส่งลิงก์ยืนยันไปที่ ' + email + ' แล้ว ยืนยันแล้วกลับมากดเข้าสู่ระบบ');
-      authSignup = false; renderAuthMode();
-      return;
-    }
-    authModal.classList.remove('open');
-    el('authPassword').value = '';
-    await enterCloud(res.data.session.user);
-  }catch(e){
-    authMsg('fail', friendlyDbError(e));
-  }finally{ btn.disabled = false; }
+  else if(IN_CLAUDE) showError('หน้านี้เปิดอยู่บน claude.ai ซึ่งบล็อกการเชื่อมต่อภายนอก — เปิดจากเว็บของคุณ (เช่น Netlify) หรือไฟล์ .html ในเครื่องเพื่อใช้ Supabase');
+  else connectCloud();
 });
 
-async function enterCloud(user){
-  setCloudStatus('saving', 'กำลังโหลดจาก Supabase...');
+async function connectCloud(){
+  if(!supabaseClient) return;
+  setCloudStatus('saving', 'กำลังเชื่อมต่อ Supabase...');
   syncActiveProjectFromGlobals();
-  localBackup = JSON.parse(JSON.stringify(projectsData));
+  if(appMode !== 'cloud') localBackup = JSON.parse(JSON.stringify(projectsData));
   try{
-    cloudUser = user;
-    const { data: prof } = await supabaseClient.from('profiles').select('display_name').eq('id', user.id).maybeSingle();
-    userName = (prof && prof.display_name) || (user.email || '').split('@')[0];
-    renderUser();
     appMode = 'cloud';
     await loadCloudProjects();
-    store.set('qa-offline', '0');
     setCloudStatus('saved');
-    nameModal.classList.remove('open');
-    showSuccess(`เชื่อม Supabase แล้ว — เข้าสู่ระบบเป็น ${userName} (${user.email})`);
   }catch(e){
-    appMode = 'local'; cloudUser = null;
-    projectsData = localBackup; loadGlobalsFromActiveProject(); renderProjectSelector(); render();
-    userName = store.get(USER_KEY) || ''; renderUser();
+    appMode = 'local';
+    if(localBackup){ projectsData = localBackup; loadGlobalsFromActiveProject(); renderProjectSelector(); render(); }
     setCloudStatus('local');
-    showError('โหลดข้อมูลจาก Supabase ไม่สำเร็จ: ' + friendlyDbError(e) + ' — ใช้งานแบบออฟไลน์ต่อ (รัน SQL ใน Supabase แล้วหรือยัง?)');
+    showError('เชื่อมต่อ Supabase ไม่สำเร็จ: ' + friendlyDbError(e) + ' — ใช้งานแบบออฟไลน์ (เก็บในเครื่องนี้) ไปก่อน');
   }
-  renderRoleChip();
 }
 
 async function loadCloudProjects(){
-  const [pr, mem, st] = await Promise.all([
+  const [pr, st] = await Promise.all([
     supabaseClient.from('projects').select('id, name, requirement, analysis, case_counter, created_at').order('created_at'),
-    supabaseClient.from('project_members').select('project_id, role').eq('user_id', cloudUser.id),
     supabaseClient.from('project_stats').select('project_id, total')
   ]);
   if(pr.error) throw pr.error;
-  if(mem.error) throw mem.error;
-  myRoles = Object.fromEntries((mem.data || []).map(m => [m.project_id, m.role]));
   const totals = Object.fromEntries(((st && st.data) || []).map(s => [s.project_id, s.total]));
   knownProjectIds.clear();
   const list = (pr.data || []).map(p => {
@@ -3052,7 +2633,7 @@ async function loadCloudProjects(){
   const active = getActiveProject();
   if(active.dbId) await loadProjectCases(active, true);
   loadGlobalsFromActiveProject(); resetPanelsOnProjectSwitch(); renderProjectSelector(); render();
-  subscribeRealtime(); renderRoleChip();
+  subscribeRealtime();
   if(firstRun) scheduleSync();
 }
 
@@ -3064,7 +2645,7 @@ async function loadProjectCases(proj, quiet){
   proj._loaded = true;
   proj.counter = Math.max(proj.counter || 0, 0, ...list.map(t => t.num));
   setCasesOf(proj, list);
-  if(proj.id === projectsData.activeProjectId){ counter = proj.counter; selected = new Set(); }
+  if(proj.id === projectsData.activeProjectId) counter = proj.counter;
   if(!quiet){ renderProjectSelector(); safeRender(); }
 }
 
@@ -3077,7 +2658,6 @@ async function ensureActive(){
     try{ await loadProjectCases(p); } finally{ p._loading = false; }
   }
   if(p.dbId && rtProjectId !== p.dbId) subscribeRealtime();
-  renderRoleChip();
 }
 
 // ---------- save (diff → Supabase) ----------
@@ -3098,24 +2678,24 @@ async function syncToCloud(){
     for(const id of [...knownProjectIds]){
       if(present.has(id)) continue;
       knownProjectIds.delete(id);
-      const { data, error } = await supabaseClient.from('projects').delete().eq('id', id).select('id');
-      if(error || !(data || []).length){ err = error ? friendlyDbError(error) : 'ลบโปรเจกต์ไม่ได้ — เฉพาะ Owner เท่านั้น'; await loadCloudProjects(); return; }
+      const { error } = await supabaseClient.from('projects').delete().eq('id', id);
+      if(error){ err = friendlyDbError(error); await loadCloudProjects(); return; }
     }
     for(const proj of projectsData.projects){
       const meta = { name: proj.name, requirement: proj.requirement || '', analysis: proj.analysis || null };
       const ps = JSON.stringify(meta);
       if(!proj.dbId){
-        const { data, error } = await supabaseClient.from('projects').insert(meta).select('id, case_counter').single();
+        const { data, error } = await supabaseClient.from('projects').insert(meta).select('id').single();
         if(error){ err = friendlyDbError(error); continue; }
         const oldId = proj.id;
         proj.id = proj.dbId = data.id; proj._psnap = ps; proj._loaded = true;
-        knownProjectIds.add(data.id); myRoles[data.id] = 'owner';
+        knownProjectIds.add(data.id);
         if(projectsData.activeProjectId === oldId) projectsData.activeProjectId = data.id;
         changedIds = true;
       } else if(proj._psnap !== ps){
-        const { data, error } = await supabaseClient.from('projects').update(meta).eq('id', proj.dbId).select('id');
+        const { error } = await supabaseClient.from('projects').update(meta).eq('id', proj.dbId);
         proj._psnap = ps;
-        if(error || !(data || []).length) err = error ? friendlyDbError(error) : 'ไม่มีสิทธิ์แก้ไขโปรเจกต์นี้ (ต้องเป็น Editor ขึ้นไป)';
+        if(error) err = friendlyDbError(error);
       }
       if(proj._loaded){
         const r = await syncCases(proj);
@@ -3137,61 +2717,54 @@ async function syncCases(proj){
   let err = null, changedIds = false;
   if(!(proj._snap instanceof Map)) proj._snap = new Map();
   const snap = proj._snap;
-  let list = casesOf(proj);
+  const list = casesOf(proj);
 
-  // deleted
+  // ลบ (ผ่าน RPC เพื่อบันทึกชื่อผู้ลบลงประวัติ)
   const alive = new Set(list.filter(t => t.dbId).map(t => t.dbId));
   const gone = [...snap.keys()].filter(id => !alive.has(id));
   if(gone.length){
     gone.forEach(id => snap.delete(id));
-    const { data, error } = await supabaseClient.from('test_cases').delete().in('id', gone).select('id');
-    if(error || (data || []).length < gone.length){
-      err = error ? friendlyDbError(error) : 'บางเคสลบไม่ได้ — ต้องเป็น Editor ขึ้นไป';
-      await loadProjectCases(proj);
-      return { err, changedIds: true };
-    }
+    const { error } = await supabaseClient.rpc('delete_test_cases', { p_ids: gone, p_actor: actorName() });
+    if(error){ err = friendlyDbError(error); await loadProjectCases(proj); return { err, changedIds: true }; }
   }
 
-  // inserted (DB assigns TC number)
+  // เพิ่มใหม่ (ฐานข้อมูลเป็นผู้กำหนดเลข TC)
   const fresh = list.filter(t => !t.dbId);
   if(fresh.length){
-    const rows = fresh.map(t => Object.assign(caseToRow(t), { project_id: proj.dbId, num: 0, origin: t.origin || 'ai' }));
-    const { data, error } = await supabaseClient.from('test_cases').insert(rows).select('id, num, approved_by, approved_at');
+    const rows = fresh.map(t => Object.assign(caseToRow(t), { project_id: proj.dbId, num: 0, origin: t.origin || 'ai', actor_name: actorName() }));
+    const { data, error } = await supabaseClient.from('test_cases').insert(rows).select('id, num');
     if(error){
-      err = friendlyDbError(error) + (/สิทธิ์/.test(friendlyDbError(error)) ? ' (เพิ่มเคสต้องเป็น Editor ขึ้นไป)' : '');
+      err = friendlyDbError(error);
       setCasesOf(proj, casesOf(proj).filter(t => !fresh.includes(t)));
       changedIds = true;
     } else {
       data.forEach((r, i) => {
         const t = fresh[i], oldId = t.id;
         t.id = t.dbId = r.id; t.num = r.num;
-        t.approvedById = r.approved_by || ''; t.approvedAt = r.approved_at || '';
-        if(!r.approved_by) t.approvedBy = '';
         remapCaseId(oldId, r.id);
-        snap.set(r.id, Object.assign({}, rows[i], { approved_by: r.approved_by || null }));
-        delete snap.get(r.id).project_id; delete snap.get(r.id).num; delete snap.get(r.id).origin;
+        const s = Object.assign({}, rows[i]);
+        delete s.project_id; delete s.num; delete s.origin; delete s.actor_name;
+        snap.set(r.id, s);
       });
       changedIds = true;
     }
   }
 
-  // updated (only changed columns)
+  // แก้ไข (ส่งเฉพาะคอลัมน์ที่เปลี่ยน)
   for(const t of casesOf(proj)){
     if(!t.dbId || !snap.has(t.dbId)) continue;
     const now = caseToRow(t), before = snap.get(t.dbId), diff = {};
     for(const k of Object.keys(now)) if(JSON.stringify(now[k]) !== JSON.stringify(before[k])) diff[k] = now[k];
     if(!Object.keys(diff).length) continue;
-    const { data, error } = await supabaseClient.from('test_cases').update(diff).eq('id', t.dbId).select('approved_by, approved_at').single();
+    diff.actor_name = actorName();
+    const { error } = await supabaseClient.from('test_cases').update(diff).eq('id', t.dbId).select('id').single();
     if(error){
       err = friendlyDbError(error);
       await refreshCase(proj, t.dbId, true);
       changedIds = true;
       continue;
     }
-    snap.set(t.dbId, Object.assign({}, now, { approved_by: data.approved_by || null }));
-    t.approvedAt = data.approved_at || '';
-    t.approvedById = data.approved_by || '';
-    if(!data.approved_by && t.approvedBy){ t.approvedBy = ''; changedIds = true; }
+    snap.set(t.dbId, now);
   }
   return { err, changedIds };
 }
@@ -3200,7 +2773,7 @@ async function refreshCase(proj, id, force){
   const { data } = await supabaseClient.from('test_cases_view').select('*').eq('id', id).maybeSingle();
   const list = casesOf(proj);
   const local = list.find(t => t.dbId === id);
-  if(!data){ if(local){ setCasesOf(proj, list.filter(t => t !== local)); proj._snap.delete(id); } return; }
+  if(!data){ if(local){ setCasesOf(proj, list.filter(t => t !== local)); proj._snap.delete(id); } if(!force) safeRender(); return; }
   const fresh = rowToCase(data);
   if(local) Object.assign(local, fresh); else list.push(fresh);
   proj._snap.set(id, caseToRow(local || fresh));
@@ -3222,20 +2795,19 @@ function subscribeRealtime(){
 }
 function onRealtime(proj, payload){
   if(!isCloud() || rtProjectId !== proj.dbId) return;
-  if(syncing || syncTimer){ setTimeout(() => onRealtime(proj, payload), 1200); return; }  // รอให้การบันทึกของเราเสร็จก่อน
+  if(syncing || syncTimer){ setTimeout(() => onRealtime(proj, payload), 1200); return; }
   const id = (payload.new && payload.new.id) || (payload.old && payload.old.id);
   if(!id) return;
   if(payload.eventType === 'DELETE'){
     if(!proj._snap.has(id)) return;
     proj._snap.delete(id);
     setCasesOf(proj, casesOf(proj).filter(t => t.dbId !== id));
-    selected.delete(id);
     if(drawerId === id) closeDrawer();
     safeRender();
     return;
   }
   const local = casesOf(proj).find(t => t.dbId === id);
-  if(local && JSON.stringify(caseToRow(local)) !== JSON.stringify(proj._snap.get(id))) return;  // มีการแก้ในเครื่องที่ยังไม่บันทึก
+  if(local && JSON.stringify(caseToRow(local)) !== JSON.stringify(proj._snap.get(id))) return;
   refreshCase(proj, id);
 }
 
@@ -3258,84 +2830,16 @@ async function loadCloudProjectHistory(proj){
   return map;
 }
 
-// ---------- members ----------
-const membersModal = el('membersModal');
-function memMsg(kind, text){ const s = el('membersStatus'); s.className = 'conn-status show ' + kind; s.textContent = text; }
-async function openMembers(){
-  const proj = getActiveProject(); if(!proj || !proj.dbId) return;
-  el('membersSub').textContent = `โปรเจกต์ "${proj.name}" — สิทธิ์ของคุณ: ${ROLE_LABEL[myRoles[proj.dbId]] || '-'}`;
-  el('membersStatus').className = 'conn-status';
-  membersModal.classList.add('open');
-  await renderMembers();
-}
-async function renderMembers(){
-  const proj = getActiveProject(); const wrap = el('membersList');
-  const isOwner = myRoles[proj.dbId] === 'owner';
-  el('membersAdd').style.display = isOwner ? '' : 'none';
-  wrap.innerHTML = '<div class="field-hint">กำลังโหลด...</div>';
-  const { data, error } = await supabaseClient.from('project_members')
-    .select('user_id, role, profiles(display_name, email)').eq('project_id', proj.dbId).order('added_at');
-  if(error){ wrap.innerHTML = ''; memMsg('fail', friendlyDbError(error)); return; }
-  wrap.innerHTML = '';
-  data.forEach(m => {
-    const row = document.createElement('div'); row.className = 'member-row';
-    const who = document.createElement('div'); who.className = 'member-who';
-    const n = document.createElement('strong'); n.textContent = (m.profiles && m.profiles.display_name) || '-';
-    const e = document.createElement('span'); e.textContent = (m.profiles && m.profiles.email) || '';
-    who.append(n, e);
-    const sel = document.createElement('select'); sel.className = 'cell-select'; sel.disabled = !isOwner;
-    Object.entries(ROLE_LABEL).forEach(([v, l]) => { const o = document.createElement('option'); o.value = v; o.textContent = l; if(m.role === v) o.selected = true; sel.appendChild(o); });
-    sel.addEventListener('change', async () => {
-      const { error: er } = await supabaseClient.from('project_members').update({ role: sel.value }).eq('project_id', proj.dbId).eq('user_id', m.user_id);
-      if(er){ memMsg('fail', friendlyDbError(er)); sel.value = m.role; return; }
-      memMsg('ok', 'เปลี่ยนสิทธิ์แล้ว');
-      if(m.user_id === cloudUser.id){ myRoles[proj.dbId] = sel.value; renderRoleChip(); renderMembers(); }
-    });
-    row.append(who, sel);
-    if(isOwner){
-      const rm = document.createElement('button'); rm.type = 'button'; rm.className = 'del-btn'; rm.textContent = 'นำออก';
-      rm.addEventListener('click', async () => {
-        if(!confirm(`นำ ${n.textContent} ออกจากโปรเจกต์?`)) return;
-        const { error: er } = await supabaseClient.from('project_members').delete().eq('project_id', proj.dbId).eq('user_id', m.user_id);
-        if(er) return memMsg('fail', friendlyDbError(er));
-        memMsg('ok', 'นำออกแล้ว'); renderMembers();
-      });
-      row.appendChild(rm);
-    }
-    wrap.appendChild(row);
-  });
-}
-el('membersBtn').addEventListener('click', openMembers);
-el('membersCloseBtn').addEventListener('click', () => membersModal.classList.remove('open'));
-membersModal.addEventListener('click', e => { if(e.target === membersModal) membersModal.classList.remove('open'); });
-el('memberAddBtn').addEventListener('click', async () => {
-  const proj = getActiveProject();
-  const email = el('memberEmail').value.trim();
-  if(!/^\S+@\S+\.\S+$/.test(email)) return memMsg('fail', 'กรุณาใส่อีเมลให้ถูกต้อง');
-  const { error } = await supabaseClient.rpc('add_project_member', { p_project: proj.dbId, p_email: email, p_role: el('memberRole').value });
-  if(error) return memMsg('fail', friendlyDbError(error));
-  el('memberEmail').value = '';
-  memMsg('ok', 'เพิ่ม ' + email + ' แล้ว');
-  renderMembers();
-});
-
-// ---------- account (reuses the name modal) ----------
-el('signOutBtn').addEventListener('click', async () => {
-  if(!confirm('ออกจากระบบ Supabase?')) return;
-  try{ await supabaseClient.auth.signOut(); }catch(e){ /* ignore */ }
-  store.set('qa-offline', '0');
-  location.reload();
-});
+// ---------- ย้ายโปรเจกต์ในเครื่องขึ้น Supabase ----------
 el('migrateBtn').addEventListener('click', () => {
   const src = ((localBackup && localBackup.projects) || []).filter(p => (p.testCases || []).length || (p.requirement || '').trim());
   if(!src.length) return;
-  if(!confirm(`อัปโหลด ${src.length} โปรเจกต์จากเครื่องนี้ขึ้น Supabase?\n(ตราประทับ Approve เดิมจะไม่ถูกย้าย เพราะต้อง Approve ด้วยบัญชีจริง)`)) return;
+  if(!confirm(`อัปโหลด ${src.length} โปรเจกต์จากเครื่องนี้ขึ้น Supabase?\nทุกคนที่เปิดลิงก์นี้จะเห็นโปรเจกต์เหล่านี้`)) return;
   syncActiveProjectFromGlobals();
   src.forEach(p => {
     const cases = (p.testCases || []).map(c => {
       const t = normalizeCase(JSON.parse(JSON.stringify(c)));
-      delete t.dbId; t.id = genId('tc'); t.origin = 'import';
-      t.approvedBy = ''; t.approvedAt = ''; t.approvedById = ''; t.history = []; t.dbFailCount = 0;
+      delete t.dbId; t.id = genId('tc'); t.origin = 'import'; t.history = []; t.dbFailCount = 0;
       return t;
     }).sort((a, b) => a.num - b.num);
     projectsData.projects.push({ id: genId('proj'), name: p.name + ' (จากเครื่อง)', requirement: p.requirement || '', analysis: p.analysis || null,
@@ -3349,17 +2853,15 @@ el('migrateBtn').addEventListener('click', () => {
 
 async function initCloud(){
   setCloudStatus('local');
-  if(IN_CLAUDE || !window.supabase || typeof window.supabase.createClient !== 'function'){
-    if(!IN_CLAUDE && !window.supabase) showError('โหลดไลบรารี Supabase ไม่สำเร็จ — ใช้งานแบบออฟไลน์');
-    if(!userName) openNameModal(true);
-    return;
+  if(!IN_CLAUDE && window.supabase && typeof window.supabase.createClient === 'function'){
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+    });
+    await connectCloud();
+  } else if(!IN_CLAUDE){
+    showError('โหลดไลบรารี Supabase ไม่สำเร็จ — ใช้งานแบบออฟไลน์ (เก็บในเครื่องนี้)');
   }
-  supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  let session = null;
-  try{ ({ data: { session } } = await supabaseClient.auth.getSession()); }catch(e){ session = null; }
-  if(session) await enterCloud(session.user);
-  else if(store.get('qa-offline') === '1'){ if(!userName) openNameModal(true); }
-  else openAuthModal();
+  if(!userName) openNameModal(true);
 }
 
 // ---------- init ----------
