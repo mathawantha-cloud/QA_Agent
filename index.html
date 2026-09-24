@@ -351,6 +351,19 @@
     background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:9px 14px;
   }
   .select-bar .sel-count{ font-size:13px; font-weight:600; color:var(--ink); }
+  .select-bar .sel-count .ready{ color:var(--green); }
+  .select-bar .sel-count .skip{ color:var(--amber); font-weight:600; }
+  .toast{
+    position:fixed; left:50%; bottom:calc(22px + env(safe-area-inset-bottom, 0px)); z-index:300;
+    transform:translate(-50%, 16px); opacity:0; pointer-events:none;
+    max-width:min(620px, calc(100% - 32px)); padding:12px 18px; border-radius:12px;
+    font-family:var(--sans); font-size:13.5px; font-weight:600; line-height:1.5; color:#fff;
+    box-shadow:0 12px 32px rgba(15,23,42,0.28); transition:opacity .2s ease, transform .2s ease;
+  }
+  .toast.show{ opacity:1; transform:translate(-50%, 0); pointer-events:auto; }
+  .toast.ok{ background:#15803D; }
+  .toast.err{ background:#B91C1C; }
+  @media (prefers-reduced-motion: reduce){ .toast{ transition:none; } }
   .select-bar .sel-hint{ font-size:12px; color:var(--ink-faint); flex:1; min-width:180px; }
   .select-bar.active{ border-color:var(--blueprint); box-shadow:0 0 0 3px rgba(37,99,235,0.1); }
 
@@ -604,6 +617,7 @@
   </div>
 
   <!-- Name gate -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
   <aside class="drawer" id="drawer" role="dialog" aria-modal="false" aria-label="รายละเอียดเคส" aria-hidden="true">
     <div class="drawer-head" id="drawerHead"></div>
@@ -1337,9 +1351,19 @@ function renderMockups(){
   });
 }
 
-function showError(msg){ hideSuccess(); errorBox.textContent = msg; errorBox.style.display = 'block'; }
+// toast: always visible wherever the user is on the page
+let toastTimer = null;
+function toast(msg, kind){
+  const t = el('toast'); if(!t) return;
+  t.textContent = msg;
+  t.className = 'toast show ' + (kind === 'err' ? 'err' : 'ok');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.className = 'toast ' + (kind === 'err' ? 'err' : 'ok'); }, kind === 'err' ? 7000 : 4000);
+}
+el('toast').addEventListener('click', () => el('toast').classList.remove('show'));
+function showError(msg){ hideSuccess(); errorBox.textContent = msg; errorBox.style.display = 'block'; toast(msg, 'err'); }
 function hideError(){ errorBox.style.display = 'none'; }
-function showSuccess(msg){ hideError(); successBox.textContent = msg; successBox.style.display = 'block'; }
+function showSuccess(msg){ hideError(); successBox.textContent = msg; successBox.style.display = 'block'; toast(msg, 'ok'); }
 function hideSuccess(){ successBox.style.display = 'none'; }
 
 // ---------- projects ----------
@@ -1664,10 +1688,18 @@ function renderTableOnly(){
 
 function renderSelectBar(){
   const n = selected.size;
-  el('selCount').textContent = n ? `เลือกแล้ว ${n} เคส` : 'ยังไม่ได้เลือกเคส';
+  const picked = testCases.filter(t => selected.has(t.id));
+  const ready = picked.filter(t => t.result !== 'not_run').length;
+  const cnt = el('selCount');
+  if(!n) cnt.textContent = 'ยังไม่ได้เลือกเคส';
+  else {
+    cnt.innerHTML = `เลือกแล้ว ${n} เคส · <span class="ready">พร้อม Approve ${ready}</span>` +
+      (n - ready ? ` · <span class="skip">ยังไม่ได้ทดสอบ ${n - ready} (จะถูกข้าม)</span>` : '');
+  }
   el('approveSelBtn').disabled = !n;
   el('deleteSelBtn').disabled = !n;
-  el('approveSelBtn').textContent = n ? `✓ บันทึก & Approve (${n})` : '✓ บันทึก & Approve';
+  el('approveSelBtn').textContent = n ? `✓ บันทึก & Approve (${ready})` : '✓ บันทึก & Approve';
+  el('approveSelBtn').title = n && !ready ? 'เคสที่เลือกยังไม่ได้ทดสอบ — ตั้งสถานะผ่าน/ไม่ผ่านก่อน' : '';
   el('deleteSelBtn').textContent = n ? `ลบเคสที่เลือก (${n})` : 'ลบเคสที่เลือก';
   el('selectBar').classList.toggle('active', n > 0);
   const visN = visibleCases().length;
@@ -1698,7 +1730,7 @@ el('approveSelBtn').addEventListener('click', () => {
   const ready = picked.filter(t => t.result !== 'not_run');
   const skipped = picked.length - ready.length;
   if(!ready.length){
-    showError('เคสที่เลือกยังเป็น "ยังไม่ได้ทดสอบ" ทั้งหมด — เลือกสถานะผ่านหรือไม่ผ่านก่อนกด Approve');
+    showError(`Approve ไม่ได้: ${picked.length} เคสที่เลือกยังเป็น "ยังไม่ได้ทดสอบ" ทั้งหมด — กดสถานะ ผ่าน หรือ ไม่ผ่าน ของแต่ละเคสก่อน แล้วค่อยกด Approve`);
     return;
   }
   const now = approveCases(ready);
